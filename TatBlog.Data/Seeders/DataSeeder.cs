@@ -29,7 +29,7 @@ public class DataSeeder : IDataSeeder
         var posts = AddPosts(authors, category, tags);
     }
 
-    private IList<Author> AddAuthors() 
+    private IList<Author> AddAuthors()
     {
         var authors = new List<Author>()
         {
@@ -76,7 +76,7 @@ public class DataSeeder : IDataSeeder
         return authors;
     }
 
-    private IList<Category> AddCategories() 
+    private IList<Category> AddCategories()
     {
         var categories = new List<Category>()
         {
@@ -98,7 +98,7 @@ public class DataSeeder : IDataSeeder
         return categories;
     }
 
-    private IList<Tag> AddTags() 
+    private IList<Tag> AddTags()
     {
         var tags = new List<Tag>()
         {
@@ -116,7 +116,7 @@ public class DataSeeder : IDataSeeder
         return tags;
     }
 
-    private IList<Post> AddPosts(IList<Author> authors, IList<Category> categories, IList<Tag> tags) 
+    private IList<Post> AddPosts(IList<Author> authors, IList<Category> categories, IList<Tag> tags)
     {
         var posts = new List<Post>()
         {
@@ -136,6 +136,79 @@ public class DataSeeder : IDataSeeder
                 Tags = new List<Tag>()
                 {
                     tags[0]
+                }
+            },
+            new()
+            {
+
+                Title = "ASP.NET Core Diagnostic Scenarios",
+                ShortDescription = "David and friend has great .....",
+                Description = "Here's a few DON'T and DO example...",
+                Meta = "Nothing to read...",
+                UrlSlug = "aspnet-core-diagnostic-scenarios",
+                Published = true,
+                PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+                ModifiedDate = null,
+                ViewCount = 2,
+                Author = authors[1],
+                Category = categories[1],
+                Tags = new List<Tag>()
+                {
+                    tags[1]
+                }
+            },
+            new()
+            {
+                Title = "ASP.NET Core Diagnostic Scenarios",
+                ShortDescription = "David and friend has great .....",
+                Description = "Here's a few DON'T and DO example...",
+                Meta = "Nothing to read...",
+                UrlSlug = "aspnet-core-diagnostic-scenarios",
+                Published = true,
+                PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+                ModifiedDate = null,
+                ViewCount = 5,
+                Author = authors[2],
+                Category = categories[2],
+                Tags = new List<Tag>()
+                {
+                    tags[2]
+                }
+            },
+            new()
+            {
+                Title = "ASP.NET Core Diagnostic Scenarios",
+                ShortDescription = "David and friend has great .....",
+                Description = "Here's a few DON'T and DO example...",
+                Meta = "Nothing to read...",
+                UrlSlug = "aspnet-core-diagnostic-scenarios",
+                Published = true,
+                PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+                ModifiedDate = null,
+                ViewCount = 15,
+                Author = authors[3],
+                Category = categories[3],
+                Tags = new List<Tag>()
+                {
+                    tags[3]
+                }
+            },
+            new()
+            {
+                Title = "ASP.NET Core Diagnostic Scenarios",
+                ShortDescription = "David and friend has great .....",
+                Description = "Here's a few DON'T and DO example...",
+                Meta = "Nothing to read...",
+                UrlSlug = "aspnet-core-diagnostic-scenarios",
+                Published = true,
+                PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+                ModifiedDate = null,
+                ViewCount = 20,
+                Author = authors[4],
+                Category = categories[4],
+                Tags = new List<Tag>()
+                {
+                    tags[4]
                 }
             }
         };
