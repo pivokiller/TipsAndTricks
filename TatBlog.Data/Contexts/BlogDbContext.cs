@@ -11,6 +11,7 @@ namespace TatBlog.Data.Contexts;
 
 public class BlogDbContext : DbContext
 {
+    #region DbSet
     public DbSet<Author> Authors { get; set; }
 
     public DbSet<Category> Categories { get; set; }
@@ -18,6 +19,16 @@ public class BlogDbContext : DbContext
     public DbSet<Post> Posts { get; set; }
 
     public DbSet<Tag> Tags { get; set; }
+    #endregion
+
+    public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
+    {
+
+    }
+
+    public BlogDbContext()
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

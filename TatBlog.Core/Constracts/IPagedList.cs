@@ -41,7 +41,7 @@ public interface IPagedList
     // Thứ tự của phần từ cuối trang trong truy vấn (bắt đầu từ 1)
     int LastItemIndex { get; }
 
-   
+
 }
 public interface IPagedList<out T> : IPagedList, IEnumerable<T>
 {

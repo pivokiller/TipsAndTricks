@@ -29,7 +29,7 @@ public class DataSeeder : IDataSeeder
         var posts = AddPosts(authors, category, tags);
     }
 
-    private IList<Author> AddAuthors()
+    private IList<Author> AddAuthors() 
     {
         var authors = new List<Author>()
         {
@@ -76,7 +76,7 @@ public class DataSeeder : IDataSeeder
         return authors;
     }
 
-    private IList<Category> AddCategories()
+    private IList<Category> AddCategories() 
     {
         var categories = new List<Category>()
         {
@@ -98,7 +98,7 @@ public class DataSeeder : IDataSeeder
         return categories;
     }
 
-    private IList<Tag> AddTags()
+    private IList<Tag> AddTags() 
     {
         var tags = new List<Tag>()
         {
@@ -116,7 +116,7 @@ public class DataSeeder : IDataSeeder
         return tags;
     }
 
-    private IList<Post> AddPosts(IList<Author> authors, IList<Category> categories, IList<Tag> tags)
+    private IList<Post> AddPosts(IList<Author> authors, IList<Category> categories, IList<Tag> tags) 
     {
         var posts = new List<Post>()
         {

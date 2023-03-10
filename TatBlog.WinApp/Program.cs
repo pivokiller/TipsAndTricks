@@ -1,5 +1,6 @@
 ﻿using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
+using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
 using TatBlog.WinApp;
 /* using TatBlog.Data.Seeders;*/
@@ -7,6 +8,9 @@ using TatBlog.WinApp;
 // Tạo đối tượng DbContext để quản lý phiên làm việc
 // với CSDL và trạng thái của các đối tượng
 var context = new BlogDbContext();
+
+var seeder = new DataSeeder(context);
+seeder.Initialize();
 
 // Tạo đối tượng khởi tạo dữ liệu mẫu
 /* var seeder = new DataSeeder(context); */
@@ -45,24 +49,24 @@ foreach (var author in authors)
 IBlogRepository blogRepo = new BlogRepository(context);
 
 // Tạo đối tượng chứa tham số phân trang
-var pagingParams = new PagingParams
+/* var pagingParams = new PagingParams
 {
     PageNumber = 1,         // Lấy kết quả ở trang số 1
     PageSize = 5,           // lấy 5 mẫu tin
     SortColumn = "Name",    // Sắp xếp theo tên
     SortOrder = "DESC"      // Theo chiều giảm dần
-};
+}; */
 
 // Lấy danh sách từ khóa
-var tagsList = await blogRepo.GetPagedTagsAsync(pagingParams);
+/* var tagsList = await blogRepo.GetPagedTagsAsync(pagingParams); */
 
 // Xuất ra màn hình
-Console.WriteLine("{0, -5}{1, -50}{2, 10}", "ID", "Name", "Count");
+/* Console.WriteLine("{0, -5}{1, -50}{2, 10}", "ID", "Name", "Count");
 
 foreach (var item in tagsList)
 {
     Console.WriteLine("{0, -5}{1, -50}{2, 10}", item.Id, item.Name, item.PostCount);
-}
+} */
 
 // Tìm 3 bài viết được xem/đọc nhiều nhất
 /* var posts = await blogRepo.GetPopularArticlesAsync(3); */
