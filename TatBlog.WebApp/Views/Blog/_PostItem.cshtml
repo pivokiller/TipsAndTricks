@@ -16,22 +16,46 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title text-decoration-none">
+                    <a asp-controller="Blog"
+                       asp-action="Post"
+                       asp-route-year="@Model.PostedDate.Year"
+                       asp-route-month="@Model.PostedDate.Month"
+                       asp-route-day="@Model.PostedDate.Day"
+                       asp-route-slug="@Model.UrlSlug"
+                       title="@Model.Title"
+                       class="card-title text-decoration-none text-black text-uppercase fw-bold">
                         @Model.Title
-                    </h5>
+                        @*<h5 class="card-title text-decoration-none">
+                        @Model.Title
+                        </h5>*@
+                    </a>
                     <p class="card-text">
                         <small class="text-muted">
                             Tác giả:
                         </small>
-                        <span class="text-primary">
+                        <a asp-controller="Blog"
+                           asp-action="Author"
+                           asp-route-slug="@Model.Author.UrlSlug"
+                           title="@Model.Title"
+                           class="text-primary text-decoration-none">
                             @Model.Author.FullName
-                        </span>
+                            @*<span class="text-primary">
+                            @Model.Author.FullName
+                            </span>*@
+                        </a>
                         <small class="text-muted">
                             Chủ đề:
                         </small>
-                        <span class="text-primary">
+                        <a asp-controller="Blog"
+                           asp-action="Category"
+                           asp-route-slug="@Model.Category.UrlSlug"
+                           title="@Model.Title"
+                           class="text-primary text-decoration-none">
                             @Model.Category.Name
-                        </span>
+                            @*<span class="text-primary">
+                            @Model.Category.Name
+                            </span>*@
+                        </a>
                     </p>
                     <p class="card-text">
                         @Html.Raw(Model.ShortDescription)
@@ -50,7 +74,7 @@
                            class="btn btn-primary"
                            title="@Model.Title">
                             Xem chi tiết
-                       </a>
+                        </a>
                     </div>
                 </div>
             </div>
