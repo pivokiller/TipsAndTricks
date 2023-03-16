@@ -3,10 +3,17 @@ using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
 using TatBlog.WebApp.Extensions;
+using TatBlog.WebApp.Mapsters;
+using TatBlog.WebApp.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.ConfigureMvc().ConfigureServices();
+    builder
+        .ConfigureMvc()
+        .ConfigureNLog()
+        .ConfigureServices()
+        .ConfigureMapster()
+        .ConfigureFluentValidation();
 
     //    // Thêm các dịch vụ được yêu cầu bỏi MVC Framework
     //    builder.Services.AddControllersWithViews();
