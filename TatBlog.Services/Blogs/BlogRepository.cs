@@ -23,7 +23,7 @@ public class BlogRepository : IBlogRepository
         IQueryable<Post> postsQuery = _context.Set<Post>()
             .Include(x => x.Category)
             .Include(x => x.Author);
-        
+
         if (year > 0)
         {
             postsQuery = postsQuery.Where(x => x.PostedDate.Year == year);
@@ -75,6 +75,12 @@ public class BlogRepository : IBlogRepository
             .ExecuteUpdateAsync(p => p.SetProperty(x => x.ViewCount, x => x.ViewCount + 1), cancellationToken);
 
         /* throw new NotImplementedException(); */
+    }
+
+    public async Task<IList<Author>> GetAuthorsAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Set<Author>()
+            .ToListAsync(cancellationToken);
     }
 
     // Lấy danh sách chuyên mục và số lượng bài viết
@@ -346,7 +352,7 @@ public class BlogRepository : IBlogRepository
         /* var validTags = tags.Where(x => !string.IsNullOrWhiteSpace(x))
             .Select(x => new
             {
-                Name = x,
+                Name = x.
                 Slug = x.GenerateSlug()
             })
             .GroupBy(x => x.Slug)
@@ -378,13 +384,6 @@ public class BlogRepository : IBlogRepository
 
         return post;
     }
-
-    /* public async Task<bool> IsPostSlugExistedAsync(
-        int postId, string slug, CancellationToken cancellationToken = default)
-    {
-        return await _context.Set<Post>()
-            .AnyAsync(x => x.Id != postId && x.UrlSlug == slug, cancellationToken);
-    } */
 
     private IQueryable<Post> FilterPosts(PostQuery condition)
     {
@@ -437,15 +436,15 @@ public class BlogRepository : IBlogRepository
                                      x.Tags.Any(t => t.Name.Contains(condition.Keyword)));
         }
 
-        //if (condition.Year > 0)
-        //{
-        //    posts = posts.Where(x => x.PostedDate.Year == condition.Year);
-        //}
+        if (condition.Year > 0)
+        {
+            posts = posts.Where(x => x.PostedDate.Year == condition.Year);
+        }
 
-        //if (condition.Month > 0)
-        //{
-        //    posts = posts.Where(x => x.PostedDate.Month == condition.Month);
-        //}
+        if (condition.Month > 0)
+        {
+            posts = posts.Where(x => x.PostedDate.Month == condition.Month);
+        }
 
         if (!string.IsNullOrWhiteSpace(condition.TitleSlug))
         {
@@ -456,23 +455,23 @@ public class BlogRepository : IBlogRepository
 
         //// Compact version
         //return _context.Set<Post>()
-        //	.Include(x => x.Category)
-        //	.Include(x => x.Author)
-        //	.Include(x => x.Tags)
-        //	.WhereIf(condition.PublishedOnly, x => x.Published)
-        //	.WhereIf(condition.NotPublished, x => !x.Published)
-        //	.WhereIf(condition.CategoryId > 0, x => x.CategoryId == condition.CategoryId)
-        //	.WhereIf(!string.IsNullOrWhiteSpace(condition.CategorySlug), x => x.Category.UrlSlug == condition.CategorySlug)
-        //	.WhereIf(condition.AuthorId > 0, x => x.AuthorId == condition.AuthorId)
-        //	.WhereIf(!string.IsNullOrWhiteSpace(condition.AuthorSlug), x => x.Author.UrlSlug == condition.AuthorSlug)
-        //	.WhereIf(!string.IsNullOrWhiteSpace(condition.TagSlug), x => x.Tags.Any(t => t.UrlSlug == condition.TagSlug))
-        //	.WhereIf(!string.IsNullOrWhiteSpace(condition.Keyword), x => x.Title.Contains(condition.Keyword) ||
-        //	                                                             x.ShortDescription.Contains(condition.Keyword) ||
-        //	                                                             x.Description.Contains(condition.Keyword) ||
-        //	                                                             x.Category.Name.Contains(condition.Keyword) ||
-        //	                                                             x.Tags.Any(t => t.Name.Contains(condition.Keyword)))
-        //	.WhereIf(condition.Year > 0, x => x.PostedDate.Year == condition.Year)
-        //	.WhereIf(condition.Month > 0, x => x.PostedDate.Month == condition.Month)
-        //	.WhereIf(!string.IsNullOrWhiteSpace(condition.TitleSlug), x => x.UrlSlug == condition.TitleSlug);
+        //    .Include(x => x.Category)
+        //    .Include(x => x.Author)
+        //    .Include(x => x.Tags)
+        //    .WhereIf(condition.PublishedOnly, x => x.Published)
+        //    .WhereIf(condition.NotPublished, x => !x.Published)
+        //    .WhereIf(condition.CategoryId > 0, x => x.CategoryId == condition.CategoryId)
+        //    .WhereIf(!string.IsNullOrWhiteSpace(condition.CategorySlug), x => x.Category.UrlSlug == condition.CategorySlug)
+        //    .WhereIf(condition.AuthorId > 0, x => x.AuthorId == condition.AuthorId)
+        //    .WhereIf(!string.IsNullOrWhiteSpace(condition.AuthorSlug), x => x.Author.UrlSlug == condition.AuthorSlug)
+        //    .WhereIf(!string.IsNullOrWhiteSpace(condition.TagSlug), x => x.Tags.Any(t => t.UrlSlug == condition.TagSlug))
+        //    .WhereIf(!string.IsNullOrWhiteSpace(condition.Keyword), x => x.Title.Contains(condition.Keyword) ||
+        //                                                                 x.ShortDescription.Contains(condition.Keyword) ||
+        //                                                                 x.Description.Contains(condition.Keyword) ||
+        //                                                                 x.Category.Name.Contains(condition.Keyword) ||
+        //                                                                 x.Tags.Any(t => t.Name.Contains(condition.Keyword)))
+        //    .WhereIf(condition.Year > 0, x => x.PostedDate.Year == condition.Year)
+        //    .WhereIf(condition.Month > 0, x => x.PostedDate.Month == condition.Month)
+        //    .WhereIf(!string.IsNullOrWhiteSpace(condition.TitleSlug), x => x.UrlSlug == condition.TitleSlug);
     }
 }

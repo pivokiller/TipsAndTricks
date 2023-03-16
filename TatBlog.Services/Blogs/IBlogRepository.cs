@@ -24,6 +24,8 @@ public interface IBlogRepository
     // Tăng số lượt xem của một bài viết
     Task IncreaseViewCountAsync(int postId, CancellationToken cancellationToken = default);
 
+    Task<IList<Author>> GetAuthorsAsync(CancellationToken cancellationToken = default);
+
     // Lấy danh sách chuyên mục và số lượng bài viết
     // nằm thuộc từng chuyên mục/chủ đề
     Task<IList<CategoryItem>> GetCategoriesAsync(bool showOnMenu = false, CancellationToken cancellationToken = default);
@@ -54,5 +56,5 @@ public interface IBlogRepository
 
     Task<Post> CreateOrUpdatePostAsync(Post post, IEnumerable<string> tags,CancellationToken cancellationToken = default);
 
-    // Task<bool> IsPostSlugExistedAsync(int postId, string slug, CancellationToken cancellationToken = default);
+    Task<Post> GetPostByIdAsync(int postId, bool includeDetails = false, CancellationToken cancellationToken = default);
 }
